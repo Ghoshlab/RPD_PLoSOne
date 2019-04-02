@@ -6,8 +6,7 @@ library(MASS)
 library(ggplot2)
 library(reshape2)
 
-#Set working directory to bring in the COBRE functions
-setwd("c:/Users/jenseale/Dropbox/MS_Thesis_Work/R_Code")
+#Setting working directory (optional) and bringing in functions
 source("COBRE_Functions.R")
 
 #######################################
@@ -15,7 +14,8 @@ source("COBRE_Functions.R")
 #######################################
 
 #Bringing in COBRE parameters dataset
-setwd('C:/Users/jenseale/Dropbox/MS_Thesis_Work/')
+#NOTE: You may have to change the working directory and file name for your 
+#      file of demographic variables from the COBRE dataset
 cobre<-read.csv('COBRE_Phenotypic_Parameters.csv')
 head(cobre)
 
@@ -39,7 +39,8 @@ cobre_full$Age_Years<-as.numeric(levels(cobre_full$Age_Years))[cobre_full$Age_Ye
 
 
 #Bringing in the correlation matrix files (.mat file format)
-setwd("C:/Users/jenseale/Dropbox/MS_Thesis_Work/For_import_R/")
+#NOTE: You may have to change the working directory for the location of your .mat file
+#      adjacency matrices. This is assuming pre-processing occured in the CONN toolbox of MatLab.
 full_files<-list.files(pattern="*.mat")
 full_mydata<-lapply(full_files,function(X) readMat(X)$Z)
 full_corr<-array(dim=c(length(full_files),2,132,132))

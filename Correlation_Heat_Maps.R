@@ -7,8 +7,7 @@ library(ggplot2)
 library(reshape2)
 library(gridExtra)
 
-#Set working directory to bring in the COBRE functions
-setwd("c:/Users/jenseale/Dropbox/MS_Thesis_Work/R_Code")
+#Setting working directory (optional) and bringing in functions
 source("COBRE_Functions.R")
 
 ########################################
@@ -16,13 +15,15 @@ source("COBRE_Functions.R")
 ########################################
 
 #Bringing in the correlation matrix files for controls (.mat file format)
-setwd("C:/Users/jenseale/Dropbox/MS_Thesis_Work/For_import_R/Controls/")
+#NOTE: You may have to change the working directory for the location of your .mat file
+#      adjacency matrices. This is assuming pre-processing occured in the CONN toolbox of MatLab.
 control_files<-list.files(pattern="*.mat")
 control_data<-lapply(control_files,function(X) readMat(X)$Z)
 control_mat<-array(dim=c(length(control_files),1,132,132))
 
 #Bringing in the correlation matrix files for patients (.mat file format)
-setwd("C:/Users/jenseale/Dropbox/MS_Thesis_Work/For_import_R/Patients/")
+#NOTE: You may have to change the working directory for the location of your .mat file
+#      adjacency matrices. This is assuming pre-processing occured in the CONN toolbox of MatLab.
 case_files<-list.files(pattern="*.mat")
 case_data<-lapply(case_files,function(X) readMat(X)$Z)
 case_mat<-array(dim=c(length(case_files),1,132,132))
@@ -116,22 +117,22 @@ full_case_neg_plot<-ggplot(data=melted_casept_neg,aes(x=Var1,y=Var2,fill=value))
             title="Case Subjects Average Functional Connectivity \nCorrelation Heat Map - No Change to Negative Correlations")+
        theme(plot.title=element_text(hjust=0.5))
 
-tiff(filename="C:/Users/jenseale/Dropbox/MS_Thesis_Work/PLOS_One_Manuscript/Figures/HeatMap_fullCOBRE.tiff",width=11,height=8,units="in",res=300)
 grid.arrange(full_case_zero_plot,full_cont_zero_plot,full_case_neg_plot,full_cont_neg_plot)
-dev.off()
 
 ################################################################
 ######### COBRE Dataset: Paranoid Schizophrenia only ##########
 ################################################################
 
 #Bringing in the correlation matrix files for controls (.mat file format)
-setwd("C:/Users/jenseale/Dropbox/MS_Thesis_Work/For_import_R/Paranoid_Only/Controls/")
+#NOTE: You may have to change the working directory for the location of your .mat file
+#      adjacency matrices. This is assuming pre-processing occured in the CONN toolbox of MatLab.
 control_pfiles<-list.files(pattern="*.mat")
 control_pdata<-lapply(control_pfiles,function(X) readMat(X)$Z)
 control_pmat<-array(dim=c(length(control_pfiles),1,132,132))
 
 #Bringing in the correlation matrix files for patients (.mat file format)
-setwd("C:/Users/jenseale/Dropbox/MS_Thesis_Work/For_import_R/Paranoid_Only/Patients/")
+#NOTE: You may have to change the working directory for the location of your .mat file
+#      adjacency matrices. This is assuming pre-processing occured in the CONN toolbox of MatLab.
 case_pfiles<-list.files(pattern="*.mat")
 case_pdata<-lapply(case_pfiles,function(X) readMat(X)$Z)
 case_pmat<-array(dim=c(length(case_pfiles),1,132,132))
@@ -225,6 +226,4 @@ para_case_neg_plot<-ggplot(data=melted_casept_pneg,aes(x=Var1,y=Var2,fill=value)
        title="Paranoid Schizophrenia Case Subjects Average Functional Connectivity \nCorrelation Heat Map - No Change to Negative Correlations")+
   theme(plot.title=element_text(hjust=0.5))
 
-tiff(filename="C:/Users/jenseale/Dropbox/MS_Thesis_Work/PLOS_One_Manuscript/Figures/HeatMap_paraCOBRE.tiff",width=13,height=10,units="in",res=300)
 grid.arrange(para_case_zero_plot,para_cont_zero_plot,para_case_neg_plot,para_cont_neg_plot)
-dev.off()
