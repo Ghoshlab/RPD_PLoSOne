@@ -14,6 +14,9 @@ The real dataset utilized in the accompanying manuscript comes from The Center f
 
 For further information, including instructions on how to download the dataset, please visit the following webpage: http://fcon_1000.projects.nitrc.org/indi/retro/cobre.html.
 
+## Simulated fMRI Dataset
+As an alternative to utilizing the COBRE dataset, two R datasets have been included in this repository. The simulated_phenotypic_data.RData file contains a simulated dataframe that mimics what is provided in COBRE's phenotypic file for 145 subjects, including age, gender, handedness, and group. Diagnostic information is not provided in this simulated phenotypic dataset as random samples can be used to mimic the subset analysis of the COBRE dataset. As well, the simulated_adj_matrices.RData file contains a simulated array of 145 132x132 ROI correlation matrices. These matrices were simulated using the MNS package and were all simulated under the same function call with a high degree of noise added. Negative correlations within these matrices have not been modified to allow for full use of the COBRE-specific analysis files. 
+
 ## Description of R scripts
 ### Notes
 These scripts make some basic assumptions about the structure of the data. Adjacency matrices are assumed to come from weighted, undirected networks. The resistance perturbation distance cannot be calculated on directed networks due to the asymmetry of the adjacency matrices (a requirement for RPD calculation); an unweighted network would result in non-unique RPD values and, thusly, a trivial example. Additionally, the outcome is presumed to be dichotomous. If the outcome variable is categorical or continuous in nature, additional changes to the code, specifically within the score functions, would need to be made.
